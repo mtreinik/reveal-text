@@ -1,0 +1,15 @@
+{
+  "name": "reveal-text",
+  "version": "1.0.0",
+  "description": "Make simple text animations",
+  "main": "index.html",
+  "repository": "git@github.com:mtreinik/reveal-text.git",
+  "author": "Mikko Reinikainen <mikko.reinikainen@iki.fi>",
+  "license": "MIT",
+  "scripts": {
+    "prettier": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  }
+}
