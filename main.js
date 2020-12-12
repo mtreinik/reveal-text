@@ -1,3 +1,4 @@
+/* global slideContents */
 let slides = []
 let slideId = 0
 let canvas, ctx
@@ -12,20 +13,20 @@ const TIME_FACTOR = 0.5
 
 const FONT_SIZE = 300
 
-function deletePassedSlides() {
-  slides = slides.filter((slide) => slide.y > -slide.height)
+function deletePassedSlides () {
+  slides = slides.filter(slide => slide.y > -slide.height)
 }
 
-function clearSlides() {
+function clearSlides () {
   const yOffset = Math.floor(FONT_SIZE / 20)
-  slides.forEach((slide) => {
+  slides.forEach(slide => {
     ctx.clearRect(slide.x - 1, slide.y - yOffset, slide.width + 2, FONT_SIZE)
   })
 }
 
-function calculateNewSlidePositions() {
+function calculateNewSlidePositions () {
   const nowMillis = new Date().getTime()
-  slides.forEach((slide) => {
+  slides.forEach(slide => {
     const seconds = (nowMillis - slide.centerMillis) / 1000
     const inOrOutSpeed = seconds > 0 ? SLIDE_OUT_SPEED : SLIDE_IN_SPEED
     slide.y = Math.floor(
@@ -36,13 +37,13 @@ function calculateNewSlidePositions() {
   })
 }
 
-function drawSlides() {
-  slides.forEach((slide) => {
+function drawSlides () {
+  slides.forEach(slide => {
     ctx.fillText(slide.contents, slide.x, slide.y)
   })
 }
 
-function updateAnimation() {
+function updateAnimation () {
   clearSlides()
   calculateNewSlidePositions()
   drawSlides()
@@ -51,7 +52,7 @@ function updateAnimation() {
   animationHandle = window.requestAnimationFrame(updateAnimation)
 }
 
-function run() {
+function run () {
   canvas = document.getElementById('canvas')
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
@@ -63,7 +64,7 @@ function run() {
   animationHandle = window.requestAnimationFrame(updateAnimation)
 }
 
-function showNextSlide() {
+function showNextSlide () {
   if (slideId >= slideContents.length) {
     return
   }
@@ -93,7 +94,7 @@ function showNextSlide() {
   slideId++
 }
 
-function showPreviousSlide() {
+function showPreviousSlide () {
   if (slideId <= 0) {
     return
   }
@@ -102,9 +103,9 @@ function showPreviousSlide() {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 }
 
-function toggleAnimation() {
+function toggleAnimation () {
   if (animationHandle) {
-    cancelAnimationFrame(animationHandle)
+    window.cancelAnimationFrame(animationHandle)
     animationHandle = null
   } else {
     animationHandle = window.requestAnimationFrame(updateAnimation)
